@@ -8,7 +8,7 @@ USE SmallStoreDB;
 -- 2. TABLES CREATION (3-4 Related Tables)
 -- =========================================================
 
--- Table A: Customers (العملاء)
+-- Table A: Customers
 CREATE TABLE Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(100) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE Customers (
     city VARCHAR(50)
 );
 
--- Table B: Products (المنتجات)
+-- Table B: Products
 CREATE TABLE Products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Products (
     stock INT DEFAULT 0
 );
 
--- Table C: Orders (الطلبات - One-to-Many with Customers)
+-- Table C: Orders (One-to-Many with Customers)
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
@@ -33,7 +33,7 @@ CREATE TABLE Orders (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
 );
 
--- Table D: Order_Details (تفاصيل الطلب - Many-to-Many Junction Table)
+-- Table D: Order_Details (Many-to-Many Junction Table)
 CREATE TABLE Order_Details (
     order_id INT,
     product_id INT,
@@ -63,4 +63,3 @@ DELIMITER ;
 -- =========================================================
 -- Create an index to speed up searches by product name
 CREATE INDEX idx_product_name ON Products(product_name);
-
